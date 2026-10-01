@@ -102,7 +102,7 @@
             box-shadow: 0 15px 30px rgba(242, 112, 156, 0.6);
         }
 
-        /* Corazón grande con degradado blanco y rosado */
+        /* Corazón grande ajustado para celulares y pantallas */
         #heart-matrix {
             position: absolute;
             display: none;
@@ -111,22 +111,33 @@
             align-items: center;
             z-index: 20;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
-            line-height: 15px;
-            letter-spacing: 1.5px;
+            font-size: 9px; /* Tamaño más compacto para que quepa bien en celular */
+            line-height: 10px;
+            letter-spacing: 0.5px;
             background: linear-gradient(180deg, #ffffff 0%, #ff94b8 60%, #e0567c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 148, 184, 0.6);
+            text-shadow: 0 0 10px rgba(255, 148, 184, 0.4);
             text-align: center;
             animation: heartbeat 1.2s infinite ease-in-out;
             pointer-events: none;
             white-space: pre;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Para computadoras un poco más grande */
+        @media (min-width: 768px) {
+            #heart-matrix {
+                font-size: 14px;
+                line-height: 15px;
+                letter-spacing: 1.5px;
+            }
         }
 
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
         }
 
         /* Ventanas de fotos estilo error de Windows */
@@ -137,7 +148,7 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             border-radius: 8px;
             z-index: 40;
-            width: 240px;
+            width: 210px; /* Un pelo más adaptable a cel */
             padding: 6px;
             animation: popRandom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
@@ -157,7 +168,7 @@
 
         .window-body img {
             width: 100%;
-            height: 170px;
+            height: 150px;
             object-fit: cover;
             border-radius: 4px;
         }
@@ -189,15 +200,15 @@
     <!-- Tarjeta Principal -->
     <div class="card-container" id="mainCard">
         <div class="badge">
-            ✨ 1 de Octubre • 
+            ✨ 1 de Octubre • Díselo con amor
         </div>
         <h1>
-            Para mi princesa,<br>
-            <span>stef</span> 
+            Para mi niña,<br>
+            <span>Estefanía</span> 
             <svg class="heart-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
         </h1>
         <p class="message-text">
-            hoy 1 de octubre, no dejaria que fueras una simple espectadora, tienes a alguien que te ama con todo su corazón mi niña y ese soy yo, siempre tendras alguien quien confie en ti y te ame con todo su ser mi amor, a pesar de todas las peleas que tenemos siempre buscare la manera de que nos arreglemos y estar bien, te amo con toda mi alma princesa, seremos solo tu y yo x siempre 
+            hoy 1 de octubre, no dejaria que fueras una simple espectadora, tienes a alguien que te ama con todo su corazón mi niña y ese soy yo, siempre tendras alguien quien confie en ti y te ame con todo su ser mi amor.
         </p>
         <button class="btn-surprise" onclick="startExperience()">
             Abrir sorpresas 
@@ -217,7 +228,6 @@
     </audio>
 
     <script>
-        // Lista con las 10 fotos configuradas
         const images = [
             'foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 
             'foto6.jpg', 'foto7.jpg', 'foto8.jpg', 'foto9.jpg', 'foto10.jpg'
@@ -225,11 +235,10 @@
         
         let musicStarted = false;
 
-        // Detector de primer clic para arrancar la música sin bloqueos
         document.addEventListener('click', () => {
             if (!musicStarted) {
                 const music = document.getElementById('bgMusic');
-                music.currentTime = 0; // Cambia el 0 si quieres que empiece más adelante
+                music.currentTime = 0;
                 music.play().catch(e => console.log("Audio play blocked", e));
                 musicStarted = true;
             }
@@ -243,7 +252,6 @@
                 musicStarted = true;
             }
 
-            // Ocultar tarjeta principal y cambiar fondo a oscuro
             const mainCard = document.getElementById('mainCard');
             mainCard.style.opacity = '0';
             setTimeout(() => {
@@ -251,21 +259,18 @@
                 document.body.style.background = '#070305';
             }, 500);
 
-            // Mostrar el corazón de texto grande
             const heartMatrix = document.getElementById('heart-matrix');
             heartMatrix.style.display = 'flex';
             heartMatrix.innerHTML = generatePythonHeart();
 
-            // Después de 3.5 segundos de ver el corazón latiendo, salen las 10 fotos aleatorias cada 2.5 segundos
             setTimeout(() => {
                 document.getElementById('stop-btn').style.display = 'block';
                 setInterval(() => {
                     createWindowPopup();
-                }, 2500); // Intervalo de 2.5 segundos por foto
+                }, 2500);
             }, 3500);
         }
 
-        // Generador de corazón grande con ILOVE
         function generatePythonHeart() {
             let output = "";
             const phrase = "ILOVE";
@@ -273,7 +278,7 @@
 
             for (let y = 1.3; y >= -1.3; y -= 0.05) {
                 let line = "";
-                for (let x = -1.6; x <= 1.6; x += 0.025) {
+                for (let x = -1.6; x <= 1.6; x += 0.03) {
                     let a = x * x + y * y - 1;
                     let formula = a * a * a - x * x * y * y * y;
                     if (formula <= 0.0) {
@@ -292,8 +297,8 @@
             const win = document.createElement('div');
             win.classList.add('window-popup');
 
-            const randomX = Math.random() * (window.innerWidth - 270);
-            const randomY = Math.random() * (window.innerHeight - 240);
+            const randomX = Math.random() * (window.innerWidth - 230);
+            const randomY = Math.random() * (window.innerHeight - 200);
             const randomRot = (Math.random() * 30 - 15) + 'deg';
 
             win.style.left = randomX + 'px';
