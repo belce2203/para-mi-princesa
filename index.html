@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi niña 🤍 | 1 de Octubre</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d070a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Tarjeta principal inicial */
+        .card-container {
+            position: relative;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            padding: 45px 35px;
+            border-radius: 32px;
+            box-shadow: 0 20px 50px rgba(220, 150, 170, 0.25);
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #fae1e8;
+            color: #b84a6c;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            color: #2b2b2b;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        h1 span {
+            color: #e0567c;
+            font-style: italic;
+        }
+
+        .heart-icon {
+            display: inline-block;
+            margin-left: 6px;
+            color: #2b2b2b;
+            vertical-align: middle;
+        }
+
+        p.message-text {
+            color: #6b6b6b;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-top: 18px;
+            margin-bottom: 30px;
+        }
+
+        .btn-surprise {
+            background: linear-gradient(135deg, #f2709c 0%, #ff94b8 100%);
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(242, 112, 156, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-surprise:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(242, 112, 156, 0.6);
+        }
+
+        /* Corazón grande con degradado blanco y rosado */
+        #heart-matrix {
+            position: absolute;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 15px;
+            letter-spacing: 1.5px;
+            background: linear-gradient(180deg, #ffffff 0%, #ff94b8 60%, #e0567c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 148, 184, 0.6);
+            text-align: center;
+            animation: heartbeat 1.2s infinite ease-in-out;
+            pointer-events: none;
+            white-space: pre;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Ventanas de fotos estilo error de Windows */
+        .window-popup {
+            position: absolute;
+            background: #ffffff;
+            border: 2px solid #e0567c;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            z-index: 40;
+            width: 240px;
+            padding: 6px;
+            animation: popRandom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .window-header {
+            background: linear-gradient(135deg, #f2709c 0%, #ff94b8 100%);
+            color: white;
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: 6px;
+        }
+
+        .window-body img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        @keyframes popRandom {
+            0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+            100% { transform: scale(1) rotate(var(--rot)) ; opacity: 1; }
+        }
+
+        #stop-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff94b8;
+            color: #1a0f14;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 100;
+            display: none;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255,148,184,0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tarjeta Principal -->
+    <div class="card-container" id="mainCard">
+        <div class="badge">
+            ✨ 1 de Octubre • 
+        </div>
+        <h1>
+            Para mi princesa,<br>
+            <span>stef</span> 
+            <svg class="heart-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </h1>
+        <p class="message-text">
+            hoy 1 de octubre, no dejaria que fueras una simple espectadora, tienes a alguien que te ama con todo su corazón mi niña y ese soy yo, siempre tendras alguien quien confie en ti y te ame con todo su ser mi amor, a pesar de todas las peleas que tenemos siempre buscare la manera de que nos arreglemos y estar bien, te amo con toda mi alma princesa, seremos solo tu y yo x siempre 
+        </p>
+        <button class="btn-surprise" onclick="startExperience()">
+            Abrir sorpresas 
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+    </div>
+
+    <!-- Corazón hecho de texto -->
+    <div id="heart-matrix"></div>
+
+    <button id="stop-btn" onclick="location.reload()">Reiniciar pantalla 🤍</button>
+
+    <!-- Reproductor de audio local (cancion.mp3) -->
+    <audio id="bgMusic" loop>
+        <source src="cancion.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
+
+    <script>
+        // Lista con las 10 fotos configuradas
+        const images = [
+            'foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 
+            'foto6.jpg', 'foto7.jpg', 'foto8.jpg', 'foto9.jpg', 'foto10.jpg'
+        ];
+        
+        let musicStarted = false;
+
+        // Detector de primer clic para arrancar la música sin bloqueos
+        document.addEventListener('click', () => {
+            if (!musicStarted) {
+                const music = document.getElementById('bgMusic');
+                music.currentTime = 0; // Cambia el 0 si quieres que empiece más adelante
+                music.play().catch(e => console.log("Audio play blocked", e));
+                musicStarted = true;
+            }
+        }, { once: true });
+
+        function startExperience() {
+            const music = document.getElementById('bgMusic');
+            if (!musicStarted) {
+                music.currentTime = 0;
+                music.play().catch(e => console.log("Audio play blocked", e));
+                musicStarted = true;
+            }
+
+            // Ocultar tarjeta principal y cambiar fondo a oscuro
+            const mainCard = document.getElementById('mainCard');
+            mainCard.style.opacity = '0';
+            setTimeout(() => {
+                mainCard.style.display = 'none';
+                document.body.style.background = '#070305';
+            }, 500);
+
+            // Mostrar el corazón de texto grande
+            const heartMatrix = document.getElementById('heart-matrix');
+            heartMatrix.style.display = 'flex';
+            heartMatrix.innerHTML = generatePythonHeart();
+
+            // Después de 3.5 segundos de ver el corazón latiendo, salen las 10 fotos aleatorias cada 2.5 segundos
+            setTimeout(() => {
+                document.getElementById('stop-btn').style.display = 'block';
+                setInterval(() => {
+                    createWindowPopup();
+                }, 2500); // Intervalo de 2.5 segundos por foto
+            }, 3500);
+        }
+
+        // Generador de corazón grande con ILOVE
+        function generatePythonHeart() {
+            let output = "";
+            const phrase = "ILOVE";
+            let charIndex = 0;
+
+            for (let y = 1.3; y >= -1.3; y -= 0.05) {
+                let line = "";
+                for (let x = -1.6; x <= 1.6; x += 0.025) {
+                    let a = x * x + y * y - 1;
+                    let formula = a * a * a - x * x * y * y * y;
+                    if (formula <= 0.0) {
+                        line += phrase[charIndex % phrase.length];
+                        charIndex++;
+                    } else {
+                        line += " ";
+                    }
+                }
+                output += line + "\n";
+            }
+            return output;
+        }
+
+        function createWindowPopup() {
+            const win = document.createElement('div');
+            win.classList.add('window-popup');
+
+            const randomX = Math.random() * (window.innerWidth - 270);
+            const randomY = Math.random() * (window.innerHeight - 240);
+            const randomRot = (Math.random() * 30 - 15) + 'deg';
+
+            win.style.left = randomX + 'px';
+            win.style.top = randomY + 'px';
+            win.style.setProperty('--rot', randomRot);
+
+            const randomImg = images[Math.floor(Math.random() * images.length)];
+
+            win.innerHTML = `
+                <div class="window-header">
+                    <span>Estefania_Te_Amo.exe</span>
+                    <span>❌</span>
+                </div>
+                <div class="window-body">
+                    <img src="${randomImg}" alt="Recuerdo">
+                </div>
+            `;
+
+            document.body.appendChild(win);
+        }
+    </script>
+</body>
+</html>
